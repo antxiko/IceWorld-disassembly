@@ -1,0 +1,30 @@
+# Zonas que NO son codigo aunque el trazado pueda entrar en ellas.
+
+# La cabecera: "AB", INIT, STATEMENT, DEVICE, TEXT y seis reservados.
+0x8000 0x8010
+
+# Las tablas de saltos que van justo detras de cada llamada a 0x9F53 (A x 2) o a 0x9F59 (A and 6: cuatro
+# entradas): una palabra por valor, y la rutina salta (pop hl y jp (hl)), no vuelve a la instruccion siguiente.
+0x8888 0x8890
+0x9005 0x9011
+0x950E 0x9516
+0x9551 0x9559
+0x9929 0x9933
+0x9A10 0x9A18
+
+# Y las de 0x91A5 (A de 3 a 6, (A - 3) x 2; con 8 o mas va a 0x8C59): cuatro palabras detras de cada llamada.
+0x88AF 0x88B7
+0x897F 0x8987
+0x8A63 0x8A6B
+0x8B3C 0x8B44
+
+# Los datos de detras de cada "call 0x9782" (la rutina hace "pop ix" y los lee): en 0x9702, 0x9712... 0x9772, cada
+# una mira dos casillas y busca en cuatro parejas (casilla, tipo) y dos bytes mas (0x30 y 0x10); vuelve al que la llamo.
+0x9708 0x9712
+0x9718 0x9722
+0x9728 0x9732
+0x9738 0x9742
+0x9748 0x9752
+0x9758 0x9762
+0x9768 0x9772
+0x9778 0x9782
