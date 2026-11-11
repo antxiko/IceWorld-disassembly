@@ -741,7 +741,7 @@ C 0x928F el efecto 1
 C 0x9294 la cuenta (+0x0E)
 L 0x92A4 enemigo_estado3_paso
 C 0x92B5 en el estado 0 no da puntos
-C 0x92BB la Y: abajo (0xD8)?
+C 0x92BB el bicho de 0xD8? 500 (el de 0xB0, 1000)
 C 0x92C2 el sprite de 1000 puntos (0xCC)...
 L 0x92CB enemigo_500               ...o el de 500 (0xD0)
 L 0x92D2 enemigo_puntos            x 100 puntos
@@ -771,16 +771,16 @@ L 0x9392 huevo_abre
 L 0x93A0 huevo_vuelve              Con una 0x0F en la pieza: otra vez entero (0x48)
 L 0x93B0 huevo_sale                Sale: el estado 1
 D 0x93B8 0x93BB huevo_casillas  Las casillas del huevo: entero (0x48), roto (0x4C) y mas roto (0x50)
-L 0x93BB enemigo_estado2           Saliendo: sus dibujos; si esta abajo (0xD8), el estado 1; si no, 100 puntos
-C 0x93C4 abajo?
+L 0x93BB enemigo_estado2           Con una 0x0F en su pieza: sus dibujos (+3 + 0x20) 32 veces; el bicho de 0xD8 vuelve al estado 1, el de 0xB0 se queda en la casilla 0x40 y da 100 puntos
+C 0x93C4 el bicho de 0xD8?
 C 0x93D0 la casilla 0x40
 C 0x93D5 el sprite de los puntos
 C 0x93DD 100 puntos
 L 0x93E2 enemigo_estado1           El estado 1: si hay una 0x0F en su pieza, el estado 2
 L 0x93FA enemigo_anda
 C 0x93FD su casilla en la pantalla
-C 0x9400 abajo del todo (0xD8)?
-C 0x9407 alli, un paso de cada tres
+C 0x9400 el bicho de 0xD8?
+C 0x9407 ese, un paso de cada tres
 L 0x9414 enemigo_mira              Lo que tiene alrededor, en los bits de +6: 3 arriba, 1 abajo, 2 derecha, 0 izquierda
 C 0x9414 los bits bajos a 0
 C 0x9423 arriba: algo?
@@ -964,7 +964,7 @@ L 0x98F6 golpe_hueco_mira
 L 0x9901 golpe_rompe               El bloque se rompe: el efecto 3 y su sitio
 C 0x9902 el efecto 3
 L 0x9914 golpe_sprite              El sprite del golpe (0xE100), segun su estado (la tabla de 0x9929)
-C 0x9914 color 9
+C 0x9914 color 9 (el 4 de cada entrada de 0x99BD no se lee)
 D 0x9929 0x9933 tabla_golpe  Los cinco destinos de 0x9F53 por el estado del golpe (0-4)
 F 0x9929 w5
 L 0x9933 golpe_libre               Libre: pegado al protagonista

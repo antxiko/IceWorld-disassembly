@@ -2496,7 +2496,7 @@ enemigo_estado3_paso:
 	ld a,(iy+004h)		;92b5   ; en el estado 0 no da puntos
 	and a			;92b8
 	jr z,enemigo_fuera		;92b9
-	ld a,(iy+003h)		;92bb   ; la Y: abajo (0xD8)?
+	ld a,(iy+003h)		;92bb   ; el bicho de 0xD8? 500 (el de 0xB0, 1000)
 	cp 0d8h		;92be
 	jr nc,enemigo_500		;92c0
 	ld a,0cch		;92c2   ; el sprite de 1000 puntos (0xCC)...
@@ -2635,12 +2635,12 @@ DATA_huevo_casillas:
 ; ======================================================================
 
 
-enemigo_estado2:		; Saliendo: sus dibujos; si esta abajo (0xD8), el estado 1; si no, 100 puntos
+enemigo_estado2:		; Con una 0x0F en su pieza: sus dibujos (+3 + 0x20) 32 veces; el bicho de 0xD8 vuelve al estado 1, el de 0xB0 se queda en la casilla 0x40 y da 100 puntos
 	call enemigo_dibujo		;93bb
 	cp 020h		;93be
 	ret c			;93c0
 	ld a,(iy+003h)		;93c1
-	cp 0d8h		;93c4   ; abajo?
+	cp 0d8h		;93c4   ; el bicho de 0xD8?
 	jr nz,L_93CD		;93c6
 	ld (iy+004h),001h		;93c8
 	ret			;93cc
@@ -2667,10 +2667,10 @@ enemigo_estado1:		; El estado 1: si hay una 0x0F en su pieza, el estado 2
 enemigo_anda:
 	call iy_sitio		;93fa
 	call iy_pieza		;93fd   ; su casilla en la pantalla
-	ld a,(iy+003h)		;9400   ; abajo del todo (0xD8)?
+	ld a,(iy+003h)		;9400   ; el bicho de 0xD8?
 	cp 0d8h		;9403
 	jr c,enemigo_mira		;9405
-	inc (iy+00fh)		;9407   ; alli, un paso de cada tres
+	inc (iy+00fh)		;9407   ; ese, un paso de cada tres
 	ld a,(iy+00fh)		;940a
 	cp 003h		;940d
 	ret c			;940f
@@ -3459,7 +3459,7 @@ golpe_rompe:		; El bloque se rompe: el efecto 3 y su sitio
 	ld (ix+003h),000h		;990f
 	ret			;9913
 golpe_sprite:		; El sprite del golpe (0xE100), segun su estado (la tabla de 0x9929)
-	ld a,009h		;9914   ; color 9
+	ld a,009h		;9914   ; color 9 (el 4 de cada entrada de 0x99BD no se lee)
 	ld (0e103h),a		;9916
 	ld ix,0e3c1h		;9919
 	ld hl,(0e3c1h)		;991d
