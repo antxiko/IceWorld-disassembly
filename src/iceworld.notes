@@ -84,7 +84,7 @@ C 0x8196 el sonido callado
 C 0x819C 0xE3C0 a 0
 C 0x819F 0xE1F0-0xE1FF a cero
 L 0x81A4 contrasena_borra
-C 0x81A9 KEYWORD y sus corchetes (0x9E80)...
+C 0x81A9 KEYWORD y sus parentesis (0x9E80)...
 C 0x81AC ...en la fila 17, columna 9
 C 0x81B5 el cursor (casilla 0x2E) bajo la primera letra
 C 0x81BD las letras van a 0xE1F6
@@ -280,10 +280,10 @@ C 0x8665 un espacio
 L 0x8669 tiempo_vram               Cuatro casillas de 0xE084...
 L 0x866C tiempo_vram_hl            ...o de HL en la fila 1, columna 18
 C 0x866F LDIRVM
-L 0x8675 tiempo_lleno              TIME al empezar: 100 (en la demostracion de la fase 1, 200)
+L 0x8675 tiempo_lleno              TIME al empezar: 2000 (en la demostracion de la fase 1, 100)
 C 0x8675 la demostracion de la fase 1?
 C 0x867C no: todo a 0...
-C 0x867F ...y las centenas a 2
+C 0x867F ...y los millares a 2
 L 0x8688 tiempo_cien               100
 C 0x868B las centenas a 1
 C 0x8692 las otras a 0
@@ -635,7 +635,7 @@ C 0x8F05 ...y otro?
 L 0x8F0B libre_final               En el final: el espacio o una casilla de 0x6C o mas
 L 0x8F17 libre_descanso            En el descanso: menos de 0x40 o 0xAF o mas
 L 0x8F23 libre_si                  Z
-L 0x8F25 final                     El final, tras la fase 50: un campo de bloques, la musica 5 y el texto (0x9068) letra a letra; el protagonista sale por arriba y vuelta a la fase 1
+L 0x8F25 final                     El final, tras la fase 50: tres filas de bloques, la musica 5; el protagonista los rompe con los mandos de 0x9073 y debajo sale el texto (神技); cuando sale por arriba, vuelta a la fase 1
 C 0x8F25 las casillas del final (0xB251) en los tres tercios
 C 0x8F37 sus colores
 C 0x8F42 0xE3C0 = 2: el final
@@ -677,12 +677,12 @@ D 0x9068 0x9073 final_lineas  Las tres lineas del final: su sitio en la pantalla
 F 0x9068 w2,w2,w2,w2,w2,1
 D 0x9073 0x909E mandos  Los mandos grabados, en parejas (direccion y cuadros): los del final desde 0x9073 y los de la demostracion del titulo desde 0x9086
 F 0x9073 1,16,2,16,8
-D 0x909E 0x90F2 final_textos  Los tres textos del final: dos filas de 14 casillas propias cada uno
+D 0x909E 0x90F2 final_textos  Los tres trozos del texto del final, dos filas de 14 casillas propias cada uno: juntos, los kanji 神技 en grande
 F 0x909E 14
 D 0x90F2 0x90F8 bytes_90f2  "ld b,a / ld c,0 / jp LDIRVM": seis bytes de codigo a los que no se llega
-L 0x90F8 descanso_clave            Al empezar el descanso: KEYWORD [.....] y la contrasena siguiente (0x9E8F + 6 x 0xE00F), 240 cuadros
+L 0x90F8 descanso_clave            Al empezar el descanso: KEYWORD (.....) con la contrasena 0xE00F + 1 de la tabla (0x9E89 + 6 x eso): la de las cinco fases que se acaban de jugar; 240 cuadros
 C 0x90FB el sonido callado
-C 0x90FE KEYWORD [     ]...
+C 0x90FE KEYWORD (     )...
 C 0x9101 ...en la fila 10, columna 10
 C 0x910A la tabla de contrasenas, 6 antes
 C 0x910D la siguiente (0xE00F + 1)
@@ -690,7 +690,7 @@ L 0x9115 descanso_clave_busca      6 bytes por contrasena
 C 0x911E sus cinco letras en la fila 10, columna 19
 C 0x9127 240 cuadros
 L 0x912B descanso_clave_espera
-D 0x9133 0x9142 texto_keyword2  KEYWORD [     ] (15 casillas), el del descanso
+D 0x9133 0x9142 texto_keyword2  KEYWORD (     ) (15 casillas), el del descanso
 L 0x9142 sonido_calla_pide         Pide callar el sonido (0xE1C3 = 0xFF) y lo calla
 L 0x914A por_hacer_menos           Una cosa menos por hacer en la fase (0xE3CA)
 D 0x9152 0x9174 titulo_grande  ICE WORLD en letras grandes: una fila de 8 casillas y dos de 13
@@ -1150,7 +1150,7 @@ C 0x9E68 en BCD
 L 0x9E6C fase_numero_resto
 L 0x9E72 fase_numero_pon
 C 0x9E7B - 1
-D 0x9E80 0x9E8F texto_keyword  KEYWORD [     ] (15 casillas)
+D 0x9E80 0x9E8F texto_keyword  KEYWORD (     ) (15 casillas)
 D 0x9E8F 0x9ECB contrasenas  Las diez contrasenas: cinco letras y la fase en BCD (CASIO 01, VANIL 06, DENWA 11, JUNMK 16, PAZZL 21, KIYOK 26, FIREF 31, MORIY 36, YATTA 41, LASTE 46)
 F 0x9E8F 5,1
 L 0x9ECB camino_menos_abajo         Los giros del enemigo: el camino un paso menos (+9) o mas; si el lado esta libre, va hacia alli y no vuelve
@@ -1770,7 +1770,7 @@ C 0x8669 las cifras
 C 0x866C en la fila 1, columna 18
 C 0x8672 LDIRVM
 C 0x8678 0x87?
-C 0x8681 200
+C 0x8681 2000
 C 0x8688 todo a 0
 C 0x868C 100
 C 0x869B la copia...

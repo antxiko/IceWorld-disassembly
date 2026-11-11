@@ -181,7 +181,7 @@ contrasena_borra:
 	ld (hl),000h		;81a4
 	inc hl			;81a6
 	djnz contrasena_borra		;81a7
-	ld hl,09e80h		;81a9   ; KEYWORD y sus corchetes (0x9E80)...
+	ld hl,09e80h		;81a9   ; KEYWORD y sus parentesis (0x9E80)...
 	ld de,01a29h		;81ac   ; ...en la fila 17, columna 9
 	ld bc,0000fh		;81af   ; 15 casillas
 	call 0005ch		;81b2   ; LDIRVM
@@ -831,13 +831,13 @@ tiempo_vram_hl:		; ...o de HL en la fila 1, columna 18
 	ld de,01832h		;866c   ; en la fila 1, columna 18
 	ld bc,00004h		;866f   ; LDIRVM
 	jp 0005ch		;8672   ; LDIRVM
-tiempo_lleno:		; TIME al empezar: 100 (en la demostracion de la fase 1, 200)
+tiempo_lleno:		; TIME al empezar: 2000 (en la demostracion de la fase 1, 100)
 	ld a,(0e048h)		;8675   ; la demostracion de la fase 1?
 	cp 087h		;8678   ; 0x87?
 	jr z,tiempo_cien		;867a
 	call tiempo_borra		;867c   ; no: todo a 0...
-	ld a,002h		;867f   ; ...y las centenas a 2
-	ld (0e084h),a		;8681   ; 200
+	ld a,002h		;867f   ; ...y los millares a 2
+	ld (0e084h),a		;8681   ; 2000
 	ld (0e083h),a		;8684
 	ret			;8687
 tiempo_cien:		; 100
@@ -2031,7 +2031,7 @@ libre_descanso:		; En el descanso: menos de 0x40 o 0xAF o mas
 libre_si:		; Z
 	xor a			;8f23   ; Z: libre
 	ret			;8f24
-final:		; El final, tras la fase 50: un campo de bloques, la musica 5 y el texto (0x9068) letra a letra; el protagonista sale por arriba y vuelta a la fase 1
+final:		; El final, tras la fase 50: tres filas de bloques, la musica 5; el protagonista los rompe con los mandos de 0x9073 y debajo sale el texto (神技); cuando sale por arriba, vuelta a la fase 1
 	ld de,00680h		;8f25   ; las casillas del final (0xB251) en los tres tercios
 	call casillas_b251		;8f28
 	ld de,00e80h		;8f2b   ; el segundo tercio
@@ -2225,8 +2225,8 @@ DATA_mandos:
 	defb 023h,01bh,0f3h,041h,047h,045h,0f3h,0f3h	; 9096  #..AGE..
 
 ; ----------------------------------------------------------------------
-; DATOS final_textos: Los tres textos del final: dos filas de 14 casillas
-;   propias cada uno
+; DATOS final_textos: Los tres trozos del texto del final, dos filas de 14
+;   casillas propias cada uno: juntos, los kanji 神技 en grande
 ;   0x909e..0x90f2  (84 bytes)
 DATA_final_textos:
 	defb 010h,010h,0d0h,010h,010h,0d0h,010h,010h,010h,0d0h,010h,010h,0d0h,010h	; 909e  ..............
@@ -2248,10 +2248,10 @@ DATA_bytes_90f2:
 ; ======================================================================
 
 
-descanso_clave:		; Al empezar el descanso: KEYWORD [.....] y la contrasena siguiente (0x9E8F + 6 x 0xE00F), 240 cuadros
+descanso_clave:		; Al empezar el descanso: KEYWORD (.....) con la contrasena 0xE00F + 1 de la tabla (0x9E89 + 6 x eso): la de las cinco fases que se acaban de jugar; 240 cuadros
 	call pantalla_borra		;90f8   ; la pantalla en blanco
 	call sonido_calla_pide		;90fb   ; el sonido callado
-	ld hl,09133h		;90fe   ; KEYWORD [     ]...
+	ld hl,09133h		;90fe   ; KEYWORD (     )...
 	ld de,0194ah		;9101   ; ...en la fila 10, columna 10
 	ld bc,0000fh		;9104   ; 15 casillas
 	call 0005ch		;9107   ; LDIRVM
@@ -2280,7 +2280,7 @@ descanso_clave_espera:
 	ret			;9132
 
 ; ----------------------------------------------------------------------
-; DATOS texto_keyword2: KEYWORD [     ] (15 casillas), el del descanso
+; DATOS texto_keyword2: KEYWORD (     ) (15 casillas), el del descanso
 ;   0x9133..0x9142  (15 bytes)
 DATA_texto_keyword2:
 	defb 01bh,015h,029h,027h,01fh,022h,014h,010h,038h,010h,010h,010h,010h,010h,039h	; 9133  ..)'."..8.....9
@@ -4278,7 +4278,7 @@ fase_numero_pon:
 	ret			;9e7f
 
 ; ----------------------------------------------------------------------
-; DATOS texto_keyword: KEYWORD [     ] (15 casillas)
+; DATOS texto_keyword: KEYWORD (     ) (15 casillas)
 ;   0x9e80..0x9e8f  (15 bytes)
 DATA_texto_keyword:
 	defb 01bh,015h,029h,027h,01fh,022h,014h,010h,038h,010h,010h,010h,010h,010h,039h	; 9e80  ..)'."..8.....9
