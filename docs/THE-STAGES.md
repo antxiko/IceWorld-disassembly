@@ -2,6 +2,18 @@
 
 ![Stage 1, recorded in openMSX](imagenes/fase1.png)
 
+## The 52 maps
+
+Every stage the game counts (the stage played, 0xE007, 0 to 51), ten per row and at half size. They are **drawn by
+running the ROM** (`tools/mapas.py`): `fase_pantalla` (0x8D97) sets the frame and the scoreboard and `laberinto`
+(0x9ADB) the walls and the stage's things, as `fase` does when each one starts (0x83A8-0x83B0). Without the player or
+the creatures, which come out afterwards. The bonus stages are something else (a field of blocks) and are not here.
+
+Check: the recordings go through seven of them (stages played 0, 4, 5, 8, 9, 49 and 50); on all seven, the play area
+comes out **identical** to the recorded one during the wait at the start, with the maze already drawn.
+
+![The 52 maps](imagenes/mapas.png)
+
 ## What each stage holds
 
 Each stage is drawn from a map of its own (`laberinto`, 0x9ADB): the walls as bits, seven per byte, and then

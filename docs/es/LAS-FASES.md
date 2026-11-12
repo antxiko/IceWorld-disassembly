@@ -2,6 +2,18 @@
 
 ![La fase 1, grabada en openMSX](../imagenes/fase1.png)
 
+## Los 52 mapas
+
+Todas las fases que cuenta el juego (la fase jugada, 0xE007, de 0 a 51), diez por fila y a la mitad de tamaño. Están
+**pintadas ejecutando la ROM** (`tools/mapas.py`): `fase_pantalla` (0x8D97) pone el marco y el marcador y `laberinto`
+(0x9ADB) las paredes y las cosas de la fase, como hace `fase` al empezar cada una (0x83A8-0x83B0). Sin el protagonista
+ni los bichos, que salen después. Las fases de premio son otra cosa (un campo de bloques) y no están aquí.
+
+Cotejo: las grabaciones pasan por siete de ellas (las fases jugadas 0, 4, 5, 8, 9, 49 y 50); en las siete, la zona de
+juego sale **igual** a la grabada durante la espera del principio, con el laberinto ya pintado.
+
+![Los 52 mapas](../imagenes/mapas.png)
+
 ## Lo que tiene cada fase
 
 Cada fase se dibuja desde un mapa propio (`laberinto`, 0x9ADB): las paredes en bits, siete por byte, y después
