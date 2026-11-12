@@ -883,7 +883,7 @@ puntos_centenas:		; + A en las centenas y millares (0xE00D)
 	daa			;86d8
 	ld (0e00dh),a		;86d9
 	jr nc,puntos_cifras		;86dc   ; sin acarreo
-	ld a,001h		;86de   ; se lleva una a 0xE00C
+	ld a,001h		;86de   ; se lleva una a 0xE00C (y la de 0xE00C se pierde: pasado 999.999, a cero)
 	ld b,a			;86e0
 	ld a,(0e00ch)		;86e1   ; las decenas y centenas de millar
 	add a,b			;86e4
@@ -1094,7 +1094,7 @@ protagonista_sprite_byte:
 	cp 010h		;8852   ; 16 o mas?
 	jp nc,bloque_va		;8854   ; ...otra cosa
 	ld a,(0e1fch)		;8857   ; la palanca...
-	and 007h		;885a   ; ...movida?
+	and 007h		;885a   ; ...movida? (el 8, arriba-izquierda, se queda en 0: quieto)
 	jr z,$+9		;885c   ; sin palanca
 	set 0,a		;885e   ; la direccion, impar
 	jr $+5		;8860   ; (salta por encima de los 3 bytes de 0x8862)
@@ -4164,7 +4164,7 @@ interrupcion_cuenta:		; ...una mas cada una
 	ld a,001h		;9dc4   ; ...y el mando 1 (GTSTCK 1)
 	call 000d5h		;9dc6
 	ld c,a			;9dc9
-	ld a,(0e1f0h)		;9dca   ; juntos en 0xE1FC
+	ld a,(0e1f0h)		;9dca   ; juntos en 0xE1FC: SUMADOS (numeros 1-8: con los dos a la vez, otra direccion)
 	add a,c			;9dcd
 	ld (0e1fch),a		;9dce
 	ret			;9dd1

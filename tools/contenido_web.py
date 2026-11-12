@@ -88,7 +88,10 @@ PAGINAS = [
     [("CURIOSITIES.html", "CURIOSIDADES.html", "Curiosities", "Curiosidades",
       "stage 00 after stage 9, the keyword of the bonus, maps among the drawings and the code nobody reaches",
       "la fase 00 tras la 9, la contrase&ntilde;a del premio, mapas entre los dibujos y el c&oacute;digo al que no "
-      "se llega")],
+      "se llega"),
+     ("SECRETS-AND-BUGS.html", "SECRETOS-Y-FALLOS.html", "Secrets and bugs", "Secretos y fallos",
+      "what was searched for: the ten passwords, F1 and F2, stage 00 after stage 9, the up-left diagonal that does not move, the cursor keys and joystick added, and the score that goes back to zero",
+      "lo que se ha buscado: las diez contrase&ntilde;as, F1 y F2, la fase 00 tras la 9, la diagonal arriba-izquierda que no mueve, los cursores y el mando sumados, y los puntos que vuelven a cero")],
     [("UNDER-THE-HOOD.html", "POR-DENTRO.html", "Under the hood", "Por dentro",
       "rebuilding the ROM, the BIOS it uses, the interrupt and the loop, the RAM and the tools",
       "rehacer la ROM, la BIOS que usa, la interrupci&oacute;n y el bucle, la RAM y las herramientas")],

@@ -295,7 +295,7 @@ C 0x86C7 + A...
 C 0x86CB ...en BCD
 C 0x86D1 se lleva una
 L 0x86D3 puntos_centenas           + A en las centenas y millares (0xE00D)
-C 0x86DE se lleva una a 0xE00C
+C 0x86DE se lleva una a 0xE00C (y la de 0xE00C se pierde: pasado 999.999, a cero)
 L 0x86EB puntos_cifras             Las seis cifras sueltas de los puntos (0xE001), de los tres bytes BCD
 C 0x86EB las seis cifras...
 C 0x86EE ...de los tres bytes BCD
@@ -368,7 +368,7 @@ C 0x8846 ...en sus otros tres sprites
 C 0x884F 0xE20B: 16 o mas...
 C 0x8854 ...otra cosa
 C 0x8857 la palanca...
-C 0x885A ...movida?
+C 0x885A ...movida? (el 8, arriba-izquierda, se queda en 0: quieto)
 C 0x885E la direccion, impar
 C 0x8860 (salta por encima de los 3 bytes de 0x8862)
 D 0x8862 0x8865 byte_8862  "ld a,(0xE203)", la direccion de antes: los dos saltos de 0x885C y 0x8860 caen detras y no se llega aqui
@@ -1119,7 +1119,7 @@ C 0x9DAE la barra (0xE044)
 C 0x9DB7 en el final, sin palanca
 C 0x9DBD la palanca: los cursores (GTSTCK 0)...
 C 0x9DC4 ...y el mando 1 (GTSTCK 1)
-C 0x9DCA juntos en 0xE1FC
+C 0x9DCA juntos en 0xE1FC: SUMADOS (numeros 1-8: con los dos a la vez, otra direccion)
 L 0x9DD2 boton_mando               GTTRIG 1: lo recien pulsado en (DE) y lo sostenido en (HL)
 C 0x9DD4 GTTRIG
 L 0x9DDA boton_suelto
